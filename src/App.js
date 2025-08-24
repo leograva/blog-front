@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import React from 'react';
+import { useEffect, useState } from "react"
 import './App.css';
+import Header from './components/Header'
+import Menu from './components/Menu'
+import ListaDePosts from './components/ListaDePosts'
+import LeituraDePost from './components/LeituraDePost'
+import CriacaoDePost from './components/CriacaoDePost'
+import EdicaoDePost from './components/EdicaoDePost'
+import PaginaAdministrativa from './components/PaginaAdministrativa'
+
+const pages = {
+  0: <ListaDePosts />,
+  1: <LeituraDePost />,
+  2: <CriacaoDePost />,
+  3: <EdicaoDePost />,
+  4: <PaginaAdministrativa />
+};
 
 function App() {
+ 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Menu />
+      <CriacaoDePost />
     </div>
   );
 }
