@@ -22,6 +22,8 @@ jobs:
         run: |
           if [ -f package.json ] && npm run | grep -q 'lint'; then npm run lint; else echo "No lint script"; fi
       - name: Run tests
+        env:
+          CI: true
         run: |
           if [ -f package.json ] && npm run | grep -q 'test'; then npm test -- --watchAll=false; else echo "No test script"; fi
       - name: Build

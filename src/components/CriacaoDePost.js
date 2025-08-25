@@ -93,8 +93,9 @@ const CriacaoDePost = () => {
       <Title>Criação de Postagem</Title>
       <Form onSubmit={handleSubmit}>
         <div>
-          <Label>Título:</Label>
+          <Label htmlFor="titulo">Título:</Label>
           <Input
+            id="titulo"
             type="text"
             value={titulo}
             onChange={(e) => setTitulo(e.target.value)}
@@ -102,16 +103,18 @@ const CriacaoDePost = () => {
           />
         </div>
         <div>
-          <Label>Conteúdo:</Label>
+          <Label htmlFor="conteudo">Conteúdo:</Label>
           <Textarea
+            id="conteudo"
             value={conteudo}
             onChange={(e) => setConteudo(e.target.value)}
             required
           />
         </div>
         <div>
-          <Label>Autor:</Label>
+          <Label htmlFor="autor">Autor:</Label>
           <Input
+            id="autor"
             type="text"
             value={autor}
             onChange={(e) => setAutor(e.target.value)}
