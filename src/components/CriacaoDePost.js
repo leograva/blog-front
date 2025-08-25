@@ -14,6 +14,10 @@ const Form = styled.form`
   box-shadow: 0 1px 4px rgba(0,0,0,0.04);
   max-width: 500px;
   margin: 0 auto;
+  @media (max-width: 600px) {
+    padding: 12px 2vw;
+    max-width: 98vw;
+  }
 `;
 const Label = styled.label`
   font-weight: 500;

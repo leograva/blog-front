@@ -12,7 +12,9 @@ const Container = styled.div`
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   padding: 32px 24px;
   @media (max-width: 600px) {
-    padding: 16px 4px;
+    padding: 8px 2vw;
+    margin: 8px 0;
+    min-width: 0;
   }
 `;
 const Title = styled.h2`
@@ -36,6 +38,13 @@ const Table = styled.table`
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  font-size: 1em;
+  @media (max-width: 600px) {
+    font-size: 0.92em;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 `;
 const Th = styled.th`
   background: #1976d2;
@@ -48,13 +57,21 @@ const Td = styled.td`
   padding: 10px 8px;
   border-bottom: 1px solid #eee;
   vertical-align: top;
+  word-break: break-word;
+  @media (max-width: 600px) {
+    padding: 8px 4px;
+    font-size: 0.97em;
+  }
 `;
 const Tr = styled.tr`
   &:nth-child(even) { background: #f5f7fa; }
 `;
 const ActionRow = styled.div`
   display: flex;
+  flex-direction: row;
   gap: 6px;
+  flex-wrap: nowrap;
+  align-items: center;
 `;
 const ActionButton = styled.button`
   padding: 6px 12px;
@@ -65,10 +82,16 @@ const ActionButton = styled.button`
   font-weight: 500;
   font-size: 0.97em;
   cursor: pointer;
+  min-width: 80px;
   &:hover { background: #0d47a1; }
   &[data-variant="danger"] {
     background: #d32f2f;
     &:hover { background: #b71c1c; }
+  }
+  @media (max-width: 600px) {
+    width: auto;
+    min-width: 0;
+    font-size: 1em;
   }
 `;
 

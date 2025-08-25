@@ -12,7 +12,8 @@ const Container = styled.div`
   padding: 16px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.04);
   @media (max-width: 600px) {
-    padding: 8px;
+    padding: 8px 2vw;
+    min-width: 0;
   }
 `;
 const SearchRow = styled.div`
@@ -121,7 +122,7 @@ const ListaDePosts = () => {
             <Title onClick={() => navigate(`/leitura/${post.id}`)}>
               {post.title}
             </Title>
-            <p>{post.content}</p>
+            <p>{post.content.slice(0, 100)}</p>
             <Author>{post.author}</Author>
           </ListItem>
         ))}
