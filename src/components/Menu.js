@@ -1,21 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Menu = () => {
 
-  const components = [
-    { name: "Home", page: 0 },
-    { name: "Criação de Post", page: 1 },
-    { name: "Sobre", page: 2 }
-  ];
-
-  return (
-    <nav>
-      <ul>
-        <li>Item de Menu 1</li>
-        <li>Item de Menu 2</li>
-      </ul>
-    </nav>
-  );
-};
+const Menu = () => (
+  <nav>
+    <ul>
+      <li><Link to="/">Home</Link></li>
+      <li><Link to="/criar">Criar Post</Link></li>
+      <li><Link to="/admin">Administração</Link></li>
+    </ul>
+  </nav>
+);
 
 export default Menu;
