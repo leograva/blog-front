@@ -9,32 +9,31 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout do código
+      uses: actions/checkout@v4 # Faz checkout do código fonte
 
-      - name: Set up SSH key
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+    - name: Instalação do Node.js
+      uses: actions/setup-node@v3 # Instala Node.js
+      with:
+        node-version: '18' # Versão do Node.js
 
-      - name: Copy project files to VPS
-        run: |
-          rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" ./ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:~/blog-front/
+    - name: Instalação de dependências
+      run: npm install # Instala dependências do projeto
+      
+    - name: Estabelecendo conexão SSH
+      uses: webfactory/ssh-agent@v0.7.0
+      with:
+        ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
 
-      - name: Install Docker & Docker Compose on VPS
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} '
-            if ! command -v docker >/dev/null; then
-              curl -fsSL https://get.docker.com | sh
-            fi
-            if ! command -v docker-compose >/dev/null; then
-              sudo apt-get update && sudo apt-get install -y docker-compose
-            fi
-            sudo usermod -aG docker $USER
-          '
-
-      - name: Deploy with Docker Compose
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} '
-            cd ~/blog-front && docker-compose up -d --build
-          '
+    - name: Entrando no VPS e fazendo deploy
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+          cd /home/ubuntu/devtools/blog-api &&
+          if [ ! -d ".git" ]; then
+            git clone https://github.com/leograva/blog-api.git .;
+          else
+            git pull origin main;
+          fi
+          docker-compose pull
+          docker-compose up -d --build
+        EOF
