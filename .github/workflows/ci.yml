@@ -7,45 +7,40 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
+
       - name: Install dependencies
         run: npm install
+
       - name: Run lint
         run: |
           if [ -f package.json ] && npm run | grep -q 'lint'; then npm run lint; else echo "No lint script"; fi
-      #- name: Run tests
-      #  env:
-      #    CI: true
-      #  run: |
-      #    if [ -f package.json ] && npm run | grep -q 'test'; then npm test -- --watchAll=false; else echo "No test script"; fi
+
+      # Uncomment to enable tests
+      # - name: Run tests
+      #   env:
+      #     CI: true
+      #   run: |
+      #     if [ -f package.json ] && npm run | grep -q 'test'; then npm test -- --watchAll=false; else echo "No test script"; fi
+
       - name: Build
         run: npm run build
 
-      - name: Checkout do código
-        uses: actions/checkout@v4 # Faz checkout do código fonte
-
-      - name: Instalação do Node.js
-        uses: actions/setup-node@v3 # Instala Node.js
-        with:
-          node-version: '18' # Versão do Node.js
-
-      - name: Instalação de dependências
-        run: npm install # Instala dependências do projeto
-      
-      - name: Estabelecendo conexão SSH
+      - name: Setup SSH agent
         uses: webfactory/ssh-agent@v0.7.0
         with:
           ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
 
-      - name: Entrando no VPS e fazendo deploy
+      - name: Deploy to VPS
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
           cd /home/ubuntu/devtools/blog-front &&
