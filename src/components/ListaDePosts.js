@@ -73,15 +73,22 @@ const Author = styled.p`
   margin: 0;
 `;
 
+
+const POSTS_PER_PAGE = 4;
+
 const ListaDePosts = () => {
   const [posts, setPosts] = useState([]);
   const [busca, setBusca] = useState("");
+  const [pagina, setPagina] = useState(1);
   const navigate = useNavigate();
 
   const carregarPosts = () => {
     fetch(`${apiUrl}/posts`)
       .then((response) => response.json())
-      .then((json) => setPosts(json.data.posts))
+      .then((json) => {
+        setPosts(json.data.posts);
+        setPagina(1);
+      })
       .catch((error) => console.error("Erro ao buscar posts:", error));
   };
 
@@ -92,9 +99,13 @@ const ListaDePosts = () => {
   const handleBuscar = () => {
     fetch(`${apiUrl}/posts/search?q=${encodeURIComponent(busca)}`)
       .then((response) => response.json())
-      .then((json) => setPosts(json.data.posts))
+      .then((json) => {
+        setPosts(json.data.posts);
+        setPagina(1);
+      })
       .catch((error) => {
         setPosts([]);
+        setPagina(1);
         console.error("Erro ao buscar posts:", error);
       });
   };
@@ -103,6 +114,15 @@ const ListaDePosts = () => {
     setBusca("");
     carregarPosts();
   };
+
+  // Paginação
+  const totalPaginas = Math.ceil(posts.length / POSTS_PER_PAGE);
+  const startIdx = (pagina - 1) * POSTS_PER_PAGE;
+  const endIdx = startIdx + POSTS_PER_PAGE;
+  const postsPagina = posts.slice(startIdx, endIdx);
+
+  const handleAnterior = () => setPagina((p) => Math.max(1, p - 1));
+  const handleProxima = () => setPagina((p) => Math.min(totalPaginas, p + 1));
 
   return (
     <Container>
@@ -117,7 +137,7 @@ const ListaDePosts = () => {
         <Button onClick={handleLimpar}>Limpar</Button>
       </SearchRow>
       <List>
-        {posts.map((post) => (
+        {postsPagina.map((post) => (
           <ListItem key={post.id}>
             <Title onClick={() => navigate(`/leitura/${post.id}`)}>
               {post.title}
@@ -127,6 +147,13 @@ const ListaDePosts = () => {
           </ListItem>
         ))}
       </List>
+      {totalPaginas > 1 && (
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginTop: 16 }}>
+          <Button onClick={handleAnterior} disabled={pagina === 1}>Anterior</Button>
+          <span style={{ alignSelf: 'center' }}>Página {pagina} de {totalPaginas}</span>
+          <Button onClick={handleProxima} disabled={pagina === totalPaginas}>Próxima</Button>
+        </div>
+      )}
     </Container>
   );
 };
