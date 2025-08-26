@@ -28,9 +28,9 @@ jobs:
     - name: Entrando no VPS e fazendo deploy
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
-          cd /home/ubuntu/devtools/blog-api &&
+          cd /home/ubuntu/devtools/blog-front &&
           if [ ! -d ".git" ]; then
-            git clone https://github.com/leograva/blog-api.git .;
+            git clone https://github.com/leograva/blog-front.git .;
           else
             git pull origin main;
           fi
