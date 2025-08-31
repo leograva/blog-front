@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import apiUrl from "../config/apiUrl";
 import styled from "styled-components";
@@ -97,6 +98,7 @@ const ActionButton = styled.button`
 
 const PaginaAdministrativa = () => {
   const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
 
   function listarPosts(){
     fetch(`${apiUrl}/posts`)
@@ -117,7 +119,7 @@ const PaginaAdministrativa = () => {
   }, []);
   
   const handleEditar = (id) => {
-    window.location.href = `/editar/${id}`;
+    navigate(`/editar/${id}`);
   };
 
   const [modalOpen, setModalOpen] = useState(false);
