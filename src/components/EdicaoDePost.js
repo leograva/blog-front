@@ -19,7 +19,9 @@ const Label = styled.label`
   font-weight: 500;
   margin-bottom: 4px;
 `;
-const Input = styled.input`
+const Input = styled.input.attrs(props => ({
+  readOnly: props.readOnly
+}))`
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
