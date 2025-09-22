@@ -96,43 +96,43 @@ const EdicaoDePost = ({ post, onSave }) => {
           if (response.ok) {
             setModalOpen(true);
           }
-          onSave && onSave();
-        }}
-      >
-        <div>
-          <Label>Título:</Label>
-          <Input
+            onSave && onSave();
+          }}
+          >
+          <div>
+            <Label>Título:</Label>
+            <Input
             type="text"
             value={titulo}
             onChange={e => setTitulo(e.target.value)}
             required
-            readOnly
-          />
-        </div>
-        <div>
-          <Label>Conteúdo:</Label>
-          <Textarea
+            readOnly={true}
+            />
+          </div>
+          <div>
+            <Label>Conteúdo:</Label>
+            <Textarea
             value={conteudo}
             onChange={e => setConteudo(e.target.value)}
             required
-          />
-        </div>
-        <div>
-          <Label>Autor:</Label>
-          <Input
+            />
+          </div>
+          <div>
+            <Label>Autor:</Label>
+            <Input
             type="text"
             value={autor}
             onChange={e => setAutor(e.target.value)}
             required
-          />
-        </div>
-        <Button type="submit">Salvar</Button>
-      </Form>
-      <Modal
-        open={modalOpen}
-        title="Sucesso!"
-        message="Post editado com sucesso!"
-        onClose={() => {
+            />
+          </div>
+          <Button type="submit">Salvar</Button>
+          </Form>
+          <Modal
+          open={modalOpen}
+          title="Sucesso!"
+          message="Post editado com sucesso!"
+          onClose={() => {
           setModalOpen(false);
           navigate("/admin");
         }}
