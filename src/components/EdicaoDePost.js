@@ -106,6 +106,7 @@ const EdicaoDePost = ({ post, onSave }) => {
             value={titulo}
             onChange={e => setTitulo(e.target.value)}
             required
+            readOnly
           />
         </div>
         <div>
