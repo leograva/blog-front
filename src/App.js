@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f7f7f7;
+    background: #443c3c46;
   }
 `;
 const AppContainer = styled.div`
