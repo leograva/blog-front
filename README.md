@@ -1,103 +1,91 @@
+# Blog Frontend
 
-# Blog Front
-
-Este projeto é o frontend de um sistema de blog, desenvolvido em React.
+Sistema de blog desenvolvido em React com capacidades administrativas.
 
 ## Funcionalidades
 
-- Listagem de posts
-- Leitura de post individual
-- Criação, edição e exclusão de posts (área administrativa)
-- Interface moderna e responsiva
+- Listagem e leitura pública de posts
+- Área administrativa protegida
+- Criação, edição e exclusão de posts
+- Design responsivo para desktop e mobile
+- Interface moderna com styled-components
+- Sistema de autenticação com persistência em cookies
 
-## Instalação e uso
+## Stack Tecnológica
 
-1. Clone o repositório:
-	```bash
-	git clone https://github.com/leograva/blog-front.git
-	cd blog-front
-	```
-2. Instale as dependências:
-	```bash
-	npm install
-	```
-3. Inicie o servidor de desenvolvimento:
-	```bash
-	npm start
-	```
-	O app estará disponível em [http://localhost:3000](http://localhost:3000).
+- React 19.x com Hooks
+- React Router DOM 7.x
+- Styled Components 6.x
+- Context API para gerenciamento de estado
+- Docker & Nginx para deploy em produção
 
-## Scripts disponíveis
-
-- `npm start` — Inicia o app em modo desenvolvimento
-- `npm test` — Executa os testes
-- `npm run build` — Gera a versão de produção
-
-## Documentação Técnica
+## Começando
 
 ### Pré-requisitos
 
-- **Node.js** versão 14.x ou superior
-- **npm** versão 6.x ou superior
+- Node.js >= 14.x
+- npm >= 6.x
 
-### Instalação e Configuração
+### Instalação
 
-1. **Clone o repositório e instale as dependências:**
-	```bash
-	git clone https://github.com/leograva/blog-front.git
-	cd blog-front
-	npm install
-	```
-2. **Configuração de ambiente:**
-	- Edite `src/config/apiUrl.js` para definir a URL base da API conforme seu backend.
+1. Clone o repositório:
+```bash
+git clone https://github.com/leograva/blog-front.git
+cd blog-front
+```
 
-3. **Execução local:**
-	```bash
-	npm start
-	```
-	O app estará disponível em [http://localhost:3000](http://localhost:3000).
+2. Instale as dependências:
+```bash
+npm install
+```
 
-### Estrutura e Tecnologias
+3. Configure a URL da API:
+Edite `src/config/apiUrl.js` para definir a URL do seu backend.
 
-- **React com Hooks:** Componentização funcional e gerenciamento de estado.
-- **React Router DOM:** Rotas públicas e protegidas.
-- **Styled-components:** Temas, estilos globais e responsividade.
-- **Context API:**  
-	- `AuthContext` para autenticação e persistência via cookies.
-- **Componentes reutilizáveis:**  
-	- Localizados em `src/components/`:
-		- `Menu`, `Modal`, `ListaDePosts`, `LeituraDePost`, `CriacaoDePost`, `EdicaoDePost`.
-- **API:**  
-	- Requisições via fetch usando a URL definida em `apiUrl.js`.
-- **Responsividade:**  
-	- Layout adaptável para desktop e mobile.
+4. Inicie o servidor de desenvolvimento:
+```bash
+npm start
+```
 
-### Guia de Uso
+O aplicativo estará disponível em [http://localhost:3000](http://localhost:3000)
 
-1. **Acesse o app:**  
-	Abra [http://localhost:3000](http://localhost:3000) após iniciar o servidor.
+## Estrutura do Projeto
 
-2. **Funcionalidades públicas:**  
-	- Listar posts e ler conteúdo completo.
+```
+src/
+  ├── components/       # Componentes React
+  ├── contexts/        # Provedores de contexto
+  ├── config/          # Arquivos de configuração
+  ├── App.js          # Componente principal
+  └── index.js        # Ponto de entrada
+```
 
-3. **Área administrativa:**  
-	- Login para criar, editar ou excluir posts.
-	- Botão de logout disponível após autenticação.
+## Autenticação
 
-4. **Gerenciamento de posts:**  
-	- Crie novos posts via formulário.
-	- Edite ou exclua posts na lista administrativa.
-	- Exclusão exige confirmação via modal.
+- Credenciais para teste:
+  - Usuário: professor
+  - Senha: 1234
+- Estado de autenticação persiste via cookies
+- Rotas protegidas redirecionam para login
 
-5. **Customização:**  
-	- Altere temas ou estilos em arquivos de styled-components ou em `App.js`.
-	- Modifique a URL da API em `src/config/apiUrl.js`.
+## Deploy com Docker
 
-### Fluxo do Usuário
+Build e execução com Docker:
 
-- **Visualização:**  
-	- Qualquer usuário pode listar e ler posts.
-- **Administração:**  
-	- Usuários autenticados acessam rotas administrativas.
-	- Formulários modernos e modais para confirmação de ações.
+```bash
+docker-compose up -d --build
+```
 
+O app será servido na porta 3001 via Nginx.
+
+## CI/CD
+
+Workflow do GitHub Actions automaticamente:
+- Realiza build da aplicação
+- Executa testes
+- Faz deploy para VPS de produção
+- Gerencia containers Docker
+
+## Demo
+
+Vídeo disponível em: [Demo no YouTube](https://www.youtube.com/watch?v=cwSeV9_z3_g)
