@@ -139,7 +139,7 @@ const ListaDePosts = () => {
       <List>
         {postsPagina.map((post) => (
           <ListItem key={post.id}>
-            <Title onClick={() => navigate(`/leitura/${post.id}`)}>
+            <Title onClick={() => navigate(`/leitura/+`)}>
               {post.title}
             </Title>
             <p>{post.content.slice(0, 100)}</p>

@@ -150,8 +150,6 @@ const PaginaAdministrativa = () => {
     setPostIdToDelete(null);
   };
 
-
-
   return (
     <Container>
       <Title>Página Administrativa</Title>

@@ -16,7 +16,7 @@ export function AuthProvider({ children }) {
   });
 
   const login = (username, password) => {
-    // Simulação de login. Substitua por chamada real à API.
+    // Simulação de login.
     if (username === "professor" && password === "1234") {
       const userObj = { username };
       setUser(userObj);

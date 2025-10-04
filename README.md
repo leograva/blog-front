@@ -33,100 +33,71 @@ Este projeto é o frontend de um sistema de blog, desenvolvido em React.
 - `npm test` — Executa os testes
 - `npm run build` — Gera a versão de produção
 
-
 ## Documentação Técnica
 
-### Setup Inicial
+### Pré-requisitos
 
-1. **Pré-requisitos:**
-	 - Node.js >= 14.x
-	 - npm >= 6.x
-2. **Instalação:**
-	 - Clone o repositório e instale as dependências:
-		 ```bash
-		 git clone https://github.com/leograva/blog-front.git
-		 cd blog-front
-		 npm install
-		 ```
-3. **Configuração de ambiente:**
-	 - O arquivo `src/config/apiUrl.js` define a URL base da API. Ajuste conforme necessário para apontar para o backend desejado.
-4. **Execução:**
-	 - Para rodar localmente:
-		 ```bash
-		 npm start
-		 ```
-	 - O app estará disponível em [http://localhost:3000](http://localhost:3000).
+- **Node.js** versão 14.x ou superior
+- **npm** versão 6.x ou superior
 
-### Arquitetura da Aplicação
+### Instalação e Configuração
 
-- **React + Hooks:** Toda a lógica de UI e estado é baseada em componentes funcionais e hooks.
-- **React Router DOM:** Gerencia as rotas públicas e protegidas (administração, edição, criação de posts).
-- **Styled-components:** Todo o layout e responsividade são feitos com styled-components, incluindo temas e estilos globais.
-- **Context API:**
-	- `AuthContext` gerencia autenticação, login/logout e persistência via cookies.
-- **Componentização:**
-	- `src/components/` contém todos os componentes reutilizáveis, incluindo:
-		- `Menu`: navegação principal, com botão de logout para usuários autenticados.
-		- `Modal`: modal reutilizável para alertas e confirmações.
-		- `ListaDePosts`, `LeituraDePost`, `CriacaoDePost`, `EdicaoDePost`: telas principais do blog.
-- **API:**
-	- Todas as requisições usam fetch apontando para a URL definida em `apiUrl.js`.
-- **Responsividade:**
-	- O layout se adapta para desktop e mobile, com formulários otimizados para toque e navegação.
+1. **Clone o repositório e instale as dependências:**
+	```bash
+	git clone https://github.com/leograva/blog-front.git
+	cd blog-front
+	npm install
+	```
+2. **Configuração de ambiente:**
+	- Edite `src/config/apiUrl.js` para definir a URL base da API conforme seu backend.
+
+3. **Execução local:**
+	```bash
+	npm start
+	```
+	O app estará disponível em [http://localhost:3000](http://localhost:3000).
+
+### Estrutura e Tecnologias
+
+- **React com Hooks:** Componentização funcional e gerenciamento de estado.
+- **React Router DOM:** Rotas públicas e protegidas.
+- **Styled-components:** Temas, estilos globais e responsividade.
+- **Context API:**  
+	- `AuthContext` para autenticação e persistência via cookies.
+- **Componentes reutilizáveis:**  
+	- Localizados em `src/components/`:
+		- `Menu`, `Modal`, `ListaDePosts`, `LeituraDePost`, `CriacaoDePost`, `EdicaoDePost`.
+- **API:**  
+	- Requisições via fetch usando a URL definida em `apiUrl.js`.
+- **Responsividade:**  
+	- Layout adaptável para desktop e mobile.
 
 ### Guia de Uso
 
 1. **Acesse o app:**  
-    Abra [http://localhost:3000](http://localhost:3000) no navegador após iniciar o servidor de desenvolvimento.
+	Abra [http://localhost:3000](http://localhost:3000) após iniciar o servidor.
 
-2. **Navegação pública:**  
-    - Visualize a lista de posts na página inicial.
-    - Clique em um post para ler seu conteúdo completo.
+2. **Funcionalidades públicas:**  
+	- Listar posts e ler conteúdo completo.
 
 3. **Área administrativa:**  
-    - Clique em "Login" no menu para acessar as funcionalidades administrativas.
-    - Após autenticação, utilize as opções para criar, editar ou excluir posts.
-    - O botão de logout ficará disponível no menu.
+	- Login para criar, editar ou excluir posts.
+	- Botão de logout disponível após autenticação.
 
-4. **Criação de post:**  
-    - Clique em "Novo Post" na área administrativa.
-    - Preencha o formulário e envie para publicar um novo post.
+4. **Gerenciamento de posts:**  
+	- Crie novos posts via formulário.
+	- Edite ou exclua posts na lista administrativa.
+	- Exclusão exige confirmação via modal.
 
-5. **Edição e exclusão:**  
-    - Na lista de posts administrativos, utilize os botões de editar ou excluir ao lado de cada post.
-    - A exclusão exige confirmação em um modal.
+5. **Customização:**  
+	- Altere temas ou estilos em arquivos de styled-components ou em `App.js`.
+	- Modifique a URL da API em `src/config/apiUrl.js`.
 
-6. **Responsividade:**  
-    - O app se adapta automaticamente para uso em dispositivos móveis e desktops.
+### Fluxo do Usuário
 
-7. **Customização:**  
-    - Para alterar temas ou estilos, edite os arquivos de styled-components ou os estilos globais em `App.js`.
-    - Para mudar a URL da API, edite `src/config/apiUrl.js`.
+- **Visualização:**  
+	- Qualquer usuário pode listar e ler posts.
+- **Administração:**  
+	- Usuários autenticados acessam rotas administrativas.
+	- Formulários modernos e modais para confirmação de ações.
 
-#### Fluxo do Usuário
-
-1. **Visualização de posts:**
-	 - Qualquer usuário pode listar e ler posts.
-2. **Área administrativa:**
-	 - Professores/autores devem fazer login para acessar as rotas de criação, edição e administração de posts.
-	 - Após login, o menu exibe o botão de logout.
-3. **Criação/Edição/Exclusão:**
-	 - Formulários modernos e responsivos.
-	 - Modais informativos e de confirmação substituem alerts nativos.
-	 - Exclusão de posts exige confirmação via modal.
-
-#### Customização
-
-- Para alterar o tema ou estilos, edite os arquivos de styled-components em cada componente ou os estilos globais em `App.js`.
-- Para apontar para outra API, edite `src/config/apiUrl.js`.
-
-#### Testes
-
-- Para rodar os testes:
-	```bash
-	npm test
-	```
-
----
-
-Desenvolvido por [leograva](https://github.com/leograva)
